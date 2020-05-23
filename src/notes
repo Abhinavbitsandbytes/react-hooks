@@ -22,3 +22,40 @@ reeason set 3
 Ex- Data fetching-In ComponentDidMount and ComponentDidUpdate
 Ex- Event Listeners-In componentDidMount and componentWillUnmount
 because of stateful logic-cannot breaks components into smaller ones
+
+-------------------------------------------------------------------------------------------------
+useEffect--->
+If you been working with class comnponent you would have performed sideeffects in your component.
+Ex-updating the dom, fetching data from an api or setting up subscriptions and timers. since the render method would be too early to perform
+sideeffects you had to use lifecycle methods
+
+ex---
+1- updating the document title to the current counter value
+
+componentDidMount(){
+    document.title = `you clicked ${this.state.count} times`
+}
+componentDidUpdate(){
+    document.title = `you clicked ${this.state.count} times`
+}
+
+on initial load you want to set title as you clicked 0 times. So this code will go in ComponentDidMount which gets executed only once in component life cycle.
+then we would have a button to increment count value. But when count value increment we also need to update the title. so we have to write same piece of code in componentDidUpdate lifecycle.
+this lifecycle method gets called each time the component updates.
+
+lets consider another side useEffect
+componentDidMount(){
+    this.interval = setInterval(this.tick, 1000)
+}
+componentWillUnmount(){
+    clearInterval(this.interval)
+}
+
+2 things to observe--
+
+1-To update the document title we are writing the same code twice.
+2- setInterval and clearInterval which are related are put in different codeblocks i.e different lifecycle methods
+
+useEffect- the effect hooks lets you perform side effects in functional components.
+
+it is a close replacement for componentDidMount, componentDidUpdate and componentWillUnmount
